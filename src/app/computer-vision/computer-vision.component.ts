@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { ComputerVisionService } from '../computer-vision.service.js';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-computer-vision',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './computer-vision.component.html',
   styleUrl: './computer-vision.component.scss',
 })
@@ -15,7 +16,7 @@ export class ComputerVisionComponent {
   constructor(private computerVisionService: ComputerVisionService) {}
 
   analyzeImage() {
-    const imageUrl = 'https://example.com/image.jpg'; // Replace with the actual image URL
+    const imageUrl = '/assets/Owl.jpg'; // Replace with the actual image URL
     this.computerVisionService.analyzeImage(imageUrl).subscribe(
       (data) => {
         this.analysisResult = data;

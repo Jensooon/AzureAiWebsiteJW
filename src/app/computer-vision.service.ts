@@ -6,9 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ComputerVisionService {
-  private endpoint =
-    'https://<your-resource-name>.cognitiveservices.azure.com/';
-  private subscriptionKey = '<your-subscription-key>';
+  private endpoint = 'https://test.cognitiveservices.azure.com/';
+  private subscriptionKey = '<my_subscription_key>';
 
   constructor(private http: HttpClient) {}
 
