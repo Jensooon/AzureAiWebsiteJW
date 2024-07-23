@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { ComputerVisionService } from './computer-vision.service.ts';
+import { ComputerVisionService } from '../computer-vision.service.js';
 
 @Component({
   selector: 'app-computer-vision',
   standalone: true,
-  imports: [ComputerVisionService],
+  imports: [],
   templateUrl: './computer-vision.component.html',
   styleUrl: './computer-vision.component.scss',
 })
