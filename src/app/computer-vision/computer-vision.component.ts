@@ -1,7 +1,13 @@
 import { Component } from '@angular/core';
 import { ComputerVisionService } from '../computer-vision.service.js';
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { appKeys } from '../app.keys.js';
+import {
+  HttpClient,
+  HttpClientModule,
+  HttpParams,
+  HttpHeaders,
+} from '@angular/common/http';
 
 @Component({
   selector: 'app-computer-vision',
@@ -14,26 +20,44 @@ export class ComputerVisionComponent {
   title = 'azure-computer-vision';
   analysisResult: any;
 
-  readonly ROOT_URL = 'https://jsonplaceholder.typicode.com/';
+  readonly ROOT_URL = appKeys.endpoint;
 
-  posts: any;
+  requests: any;
+  newPost: any;
 
   constructor(private http: HttpClient) {}
 
   getPosts() {
-    this.posts = this.http.get(this.ROOT_URL + '/posts');
+    let params = new HttpParams().set('visualFeatures', 'Description');
+    let headers = new HttpHeaders().set('Ocp-Apim-Subscription-Key', '<key1>');
+
+    this.requests = this.http.get(this.ROOT_URL + '/posts', {
+      params,
+      headers,
+    });
   }
 
-  // analyzeImage() {
-  //   const imageUrl = '/assets/Owl.jpg'; // Replace with the actual image URL
-  //   this.computerVisionService.analyzeImage(imageUrl).subscribe(
-  //     (data) => {
-  //       this.analysisResult = data;
-  //       console.log(data);
-  //     },
-  //     (error) => {
-  //       console.error('Error analyzing image:', error);
-  //     }
-  //   );
-  // }
+  createPost() {
+    const data = new FormData();
+
+    // Read the file from the path
+    fetch('assets/Owl.jpg')
+      .then((response) => response.blob())
+      .then((blob) => {
+        data.append('file', blob, 'image.jpg');
+
+        let params = new HttpParams().set('visualFeatures', 'Description');
+        let headers = new HttpHeaders().set(
+          'Ocp-Apim-Subscription-Key',
+          appKeys.authKey
+        );
+
+        this.newPost = this.http.post(this.ROOT_URL, data, { params, headers });
+      })
+      .catch((error) => {
+        console.error('Error reading file:', error);
+      });
+
+    //We can use an rxjs observable to filter what we get back
+  }
 }
