@@ -1,12 +1,10 @@
 <div>
-  <!-- <button (click)="analyzeImage()">Analyze Image</button>
-  <pre>{{ analysisResult | json }}</pre> -->
   <button (click)="getPosts()">Get Posts</button>
   <div *ngFor="let request of requests | async">
     {{ request | json }}
   </div>
 
-  <button (click)="createPost()">Create Post</button>
+  <button (click)="createPost()">Describe Image</button>
   <div>
     {{ newPost | async | json }}
   </div>
