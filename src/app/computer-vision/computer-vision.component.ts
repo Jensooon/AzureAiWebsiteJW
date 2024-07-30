@@ -59,4 +59,53 @@ export class ComputerVisionComponent {
 
     //We can use an rxjs observable to filter what we get back
   }
+
+  imagePreviews: string[] = [];
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+    this.addDragOverClass();
+  }
+
+  onDragLeave(event: DragEvent) {
+    this.removeDragOverClass();
+  }
+
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    this.removeDragOverClass();
+    const files = event.dataTransfer?.files;
+    if (files && files.length > 0) {
+      this.handleFiles(files);
+    }
+  }
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files) {
+      this.handleFiles(input.files);
+    }
+  }
+
+  private handleFiles(files: FileList) {
+    this.imagePreviews = []; // Clear previous previews
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      if (file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.imagePreviews.push(e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  }
+
+  private addDragOverClass() {
+    // Add a class to style the drag over state
+  }
+
+  private removeDragOverClass() {
+    // Remove the drag over styling class
+  }
 }
