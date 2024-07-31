@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { appKeys } from '../app.keys.js';
+import { ComputerVisionService } from '../computer-vision.service.js';
 import {
   HttpClient,
   HttpClientModule,
@@ -17,47 +18,19 @@ import {
 })
 export class ComputerVisionComponent {
   title = 'azure-computer-vision';
-  analysisResult: any;
-
-  readonly ROOT_URL = appKeys.endpoint;
-
-  requests: any;
   newPost: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private computerVisionService: ComputerVisionService) {}
 
-  getPosts() {
-    let params = new HttpParams().set('visualFeatures', 'Description');
-    let headers = new HttpHeaders().set('Ocp-Apim-Subscription-Key', '<key1>');
-
-    this.requests = this.http.get(this.ROOT_URL + '/posts', {
-      params,
-      headers,
-    });
+  ngOnInit() {
+    this.getDescribeImagePost();
   }
 
-  createPost() {
-    const data = new FormData();
-
-    // Read the file from the path
-    fetch('assets/Owl.jpg')
-      .then((response) => response.blob())
-      .then((blob) => {
-        data.append('file', blob, 'image.jpg');
-
-        let params = new HttpParams().set('visualFeatures', 'Description');
-        let headers = new HttpHeaders().set(
-          'Ocp-Apim-Subscription-Key',
-          appKeys.authKey
-        );
-
-        this.newPost = this.http.post(this.ROOT_URL, data, { params, headers });
-      })
-      .catch((error) => {
-        console.error('Error reading file:', error);
-      });
-
-    //We can use an rxjs observable to filter what we get back
+  getDescribeImagePost() {
+    this.computerVisionService.imagePath = this.imagePreviews[0];
+    this.computerVisionService.createDescriptionPost().subscribe((data) => {
+      this.newPost = data;
+    });
   }
 
   imagePreviews: string[] = [];
@@ -97,6 +70,7 @@ export class ComputerVisionComponent {
           this.imagePreviews.push(e.target.result);
         };
         reader.readAsDataURL(file);
+        console.log('Error reading file:', reader.readAsDataURL(file));
       }
     }
   }
