@@ -8,11 +8,11 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { map } from 'rxjs';
-
+import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-computer-vision',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule, MatButtonModule],
   templateUrl: './computer-vision.component.html',
   styleUrl: './computer-vision.component.scss',
 })

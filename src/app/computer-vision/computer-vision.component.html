@@ -23,7 +23,9 @@
     </div>
   </div>
 
-  <button class="describe-btn" (click)="createPost()">Describe Image</button>
+  <button class="describe-btn" (click)="createPost()" mat-button>
+    Describe Image
+  </button>
 
   <div class="describe-output">
     {{ newPost | async | json }}
