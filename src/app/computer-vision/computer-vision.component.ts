@@ -7,6 +7,7 @@ import {
   HttpParams,
   HttpHeaders,
 } from '@angular/common/http';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-computer-vision',
@@ -52,10 +53,14 @@ export class ComputerVisionComponent {
             appKeys.authKey
           );
 
-          this.newPost = this.http.post(this.ROOT_URL, data, {
-            params,
-            headers,
-          });
+          this.newPost = this.http
+            .post(this.ROOT_URL, data, {
+              params,
+              headers,
+            })
+            .pipe(
+              map((response: any) => response.description.captions[0].text)
+            );
         })
         .catch((error) => {
           console.error('Error reading file:', error);
