@@ -9,14 +9,12 @@
 .drop-zone.drag-over {
   border-color: #666666;
 }
-.image-previews {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+
+.image-preview {
   margin-top: 10px;
 }
 
-.image-previews img {
+.image-preview img {
   width: 100px;
   height: 100px;
   object-fit: cover;

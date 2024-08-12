@@ -7,6 +7,7 @@ import {
   HttpParams,
   HttpHeaders,
 } from '@angular/common/http';
+import { EventEmitter, OnDestroy, Output } from '@angular/core';
 
 @Component({
   selector: 'app-computer-vision',
@@ -60,7 +61,9 @@ export class ComputerVisionComponent {
     //We can use an rxjs observable to filter what we get back
   }
 
-  imagePreviews: string[] = [];
+  @Output() imageSelected = new EventEmitter<string>(); // Output event to emit the selected image URL
+
+  imageUrl: string | null = null; // Store the single image URL
 
   onDragOver(event: DragEvent) {
     event.preventDefault();
@@ -76,36 +79,32 @@ export class ComputerVisionComponent {
     this.removeDragOverClass();
     const files = event.dataTransfer?.files;
     if (files && files.length > 0) {
-      this.handleFiles(files);
+      this.handleFile(files[0]); // Handle the first file only
     }
   }
 
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
-    if (input.files) {
-      this.handleFiles(input.files);
+    if (input.files && input.files.length > 0) {
+      this.handleFile(input.files[0]); // Handle the first file only
     }
   }
 
-  private handleFiles(files: FileList) {
-    this.imagePreviews = []; // Clear previous previews
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      if (file.type.startsWith('image/')) {
-        const reader = new FileReader();
-        reader.onload = (e: any) => {
-          this.imagePreviews.push(e.target.result);
-        };
-        reader.readAsDataURL(file);
-      }
+  private handleFile(file: File) {
+    if (this.imageUrl) {
+      URL.revokeObjectURL(this.imageUrl); // Revoke the previous URL
+    }
+
+    if (file.type.startsWith('image/')) {
+      this.imageUrl = URL.createObjectURL(file); // Create a new URL for the new file
+      this.imageSelected.emit(this.imageUrl); // Emit the new image URL
     }
   }
-
   private addDragOverClass() {
-    // Add a class to style the drag over state
+    // Optional: Add a class to style the drag over state
   }
 
   private removeDragOverClass() {
-    // Remove the drag over styling class
+    // Optional: Remove the drag over styling class
   }
 }

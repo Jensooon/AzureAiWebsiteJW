@@ -22,11 +22,7 @@
       multiple
     />
   </div>
-  <div class="image-previews">
-    <img
-      *ngFor="let preview of imagePreviews"
-      [src]="preview"
-      alt="Image preview"
-    />
+  <div class="image-preview" *ngIf="imageUrl">
+    <img [src]="imageUrl" alt="Image preview" />
   </div>
 </div>
