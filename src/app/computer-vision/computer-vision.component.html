@@ -1,28 +1,36 @@
-<div>
-  <button (click)="getPosts()">Get Posts</button>
-  <div *ngFor="let request of requests | async">
-    {{ request | json }}
+<div class="grid-container">
+  <div class="header">
+    <h1>Computer Vision</h1>
   </div>
 
-  <button (click)="createPost()">Describe Image</button>
-  <div>
+  <div class="image-upload">
+    <div
+      class="drop-zone"
+      (dragover)="onDragOver($event)"
+      (dragleave)="onDragLeave($event)"
+      (drop)="onDrop($event)"
+    >
+      <p>Drag & drop your image here, or click to select files</p>
+      <input
+        type="file"
+        accept="image/*"
+        (change)="onFileSelected($event)"
+        multiple
+      />
+    </div>
+    <div class="image-preview" *ngIf="imageUrl">
+      <img [src]="imageUrl" alt="Image preview" />
+    </div>
+  </div>
+
+  <button class="describe-btn" (click)="createPost()">Describe Image</button>
+
+  <div class="describe-output">
     {{ newPost | async | json }}
   </div>
-  <div
-    class="drop-zone"
-    (dragover)="onDragOver($event)"
-    (dragleave)="onDragLeave($event)"
-    (drop)="onDrop($event)"
-  >
-    <p>Drag & drop your image here, or click to select files</p>
-    <input
-      type="file"
-      accept="image/*"
-      (change)="onFileSelected($event)"
-      multiple
-    />
-  </div>
-  <div class="image-preview" *ngIf="imageUrl">
-    <img [src]="imageUrl" alt="Image preview" />
-  </div>
 </div>
+
+<!-- <button (click)="getPosts()">Get Posts</button>
+<div *ngFor="let request of requests | async">
+  {{ request | json }}
+</div> -->

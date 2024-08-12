@@ -1,3 +1,31 @@
+.grid-container {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+
+  grid-template-areas:
+    "heading heading"
+    "image-upload image-upload"
+    "describe-btn describe-output"
+    "describe-btn describe-output";
+}
+
+.image-upload {
+  grid-area: image-upload;
+}
+
+.heading {
+  grid-area: heading;
+}
+
+.describe-btn {
+  grid-area: describe-btn;
+}
+
+.describe-output {
+  grid-area: describe-output;
+}
+
 .drop-zone {
   border: 2px dashed #cccccc;
   border-radius: 5px;
