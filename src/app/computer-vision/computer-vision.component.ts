@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { appKeys } from '../app.keys.js';
 import {
@@ -7,7 +7,6 @@ import {
   HttpParams,
   HttpHeaders,
 } from '@angular/common/http';
-import { EventEmitter, OnDestroy, Output } from '@angular/core';
 
 @Component({
   selector: 'app-computer-vision',
@@ -40,25 +39,30 @@ export class ComputerVisionComponent {
   createPost() {
     const data = new FormData();
 
-    // Read the file from the path
-    fetch('assets/Owl.jpg')
-      .then((response) => response.blob())
-      .then((blob) => {
-        data.append('file', blob, 'image.jpg');
+    if (this.imageUrl) {
+      // Read the file from the path
+      fetch(this.imageUrl)
+        .then((response) => response.blob())
+        .then((blob) => {
+          data.append('file', blob, 'image.jpg');
 
-        let params = new HttpParams().set('visualFeatures', 'Description');
-        let headers = new HttpHeaders().set(
-          'Ocp-Apim-Subscription-Key',
-          appKeys.authKey
-        );
+          let params = new HttpParams().set('visualFeatures', 'Description');
+          let headers = new HttpHeaders().set(
+            'Ocp-Apim-Subscription-Key',
+            appKeys.authKey
+          );
 
-        this.newPost = this.http.post(this.ROOT_URL, data, { params, headers });
-      })
-      .catch((error) => {
-        console.error('Error reading file:', error);
-      });
+          this.newPost = this.http.post(this.ROOT_URL, data, {
+            params,
+            headers,
+          });
+        })
+        .catch((error) => {
+          console.error('Error reading file:', error);
+        });
 
-    //We can use an rxjs observable to filter what we get back
+      //We can use an rxjs observable to filter what we get back
+    }
   }
 
   @Output() imageSelected = new EventEmitter<string>(); // Output event to emit the selected image URL
