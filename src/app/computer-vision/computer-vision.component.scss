@@ -7,7 +7,7 @@
     "heading heading"
     "image-upload image-upload"
     "describe-btn describe-output"
-    "describe-btn describe-output";
+    "ocr-btn ocr-output";
 }
 
 .image-upload {
@@ -24,6 +24,14 @@
 
 .describe-output {
   grid-area: describe-output;
+}
+
+.ocr-btn {
+  grid-area: ocr-btn;
+}
+
+.ocr-output {
+  grid-area: ocr-output;
 }
 
 .drop-zone {

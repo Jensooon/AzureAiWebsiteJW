@@ -23,12 +23,20 @@
     </div>
   </div>
 
-  <button class="describe-btn" (click)="createPost()" mat-button>
+  <button class="describe-btn" (click)="createDescribeImagePost()" mat-button>
     Describe Image
   </button>
 
   <div class="describe-output">
-    {{ newPost | async | json }}
+    {{ describeImagePost | async | json }}
+  </div>
+
+  <button class="ocr-btn" (click)="createOCRPost()" mat-button>
+    Retrieve Text from Image
+  </button>
+
+  <div class="ocr-output">
+    {{ OCRPost | async | json }}
   </div>
 </div>
 

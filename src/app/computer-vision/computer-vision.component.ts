@@ -23,7 +23,9 @@ export class ComputerVisionComponent {
   readonly ROOT_URL = appKeys.endpoint;
 
   requests: any;
-  newPost: any;
+  describeImagePost: any;
+
+  OCRPost: any;
 
   constructor(private http: HttpClient) {}
 
@@ -37,7 +39,7 @@ export class ComputerVisionComponent {
     });
   }
 
-  createPost() {
+  createDescribeImagePost() {
     const data = new FormData();
 
     if (this.imageUrl) {
@@ -53,7 +55,7 @@ export class ComputerVisionComponent {
             appKeys.authKey
           );
 
-          this.newPost = this.http
+          this.describeImagePost = this.http
             .post(this.ROOT_URL, data, {
               params,
               headers,
@@ -65,10 +67,12 @@ export class ComputerVisionComponent {
         .catch((error) => {
           console.error('Error reading file:', error);
         });
-
-      //We can use an rxjs observable to filter what we get back
     }
   }
+
+  createOCRPost() {}
+
+  getOCRPost() {}
 
   @Output() imageSelected = new EventEmitter<string>(); // Output event to emit the selected image URL
 
