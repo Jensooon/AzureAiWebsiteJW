@@ -35,8 +35,8 @@
     Retrieve Text from Image
   </button>
 
-  <div class="ocr-output">
-    {{ OCRPost | async | json }}
+  <div class="ocr-output" *ngFor="let request of requests | async">
+    {{ request | json }}
   </div>
 </div>
 

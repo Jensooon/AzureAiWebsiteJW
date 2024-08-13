@@ -20,7 +20,9 @@ export class ComputerVisionComponent {
   title = 'azure-computer-vision';
   analysisResult: any;
 
-  readonly ROOT_URL = appKeys.endpoint;
+  readonly DESCRIBE_IMG_URL = appKeys.describeImageEndpoint;
+  readonly OCR_IMG_URL = appKeys.OCRImageEndpoint;
+  readonly OCR_GET_URL = appKeys.OCRGetEndpoint;
 
   requests: any;
   describeImagePost: any;
@@ -33,7 +35,7 @@ export class ComputerVisionComponent {
     let params = new HttpParams().set('visualFeatures', 'Description');
     let headers = new HttpHeaders().set('Ocp-Apim-Subscription-Key', '<key1>');
 
-    this.requests = this.http.get(this.ROOT_URL + '/posts', {
+    this.requests = this.http.get(this.DESCRIBE_IMG_URL + '/posts', {
       params,
       headers,
     });
@@ -56,7 +58,7 @@ export class ComputerVisionComponent {
           );
 
           this.describeImagePost = this.http
-            .post(this.ROOT_URL, data, {
+            .post(this.DESCRIBE_IMG_URL, data, {
               params,
               headers,
             })
@@ -70,9 +72,61 @@ export class ComputerVisionComponent {
     }
   }
 
-  createOCRPost() {}
+  private operatorLocation = '';
 
-  getOCRPost() {}
+  createOCRPost() {
+    const data = new FormData();
+
+    if (this.imageUrl) {
+      fetch(this.imageUrl)
+        .then((response) => response.blob())
+        .then((blob) => {
+          data.append('file', blob, 'image.jpg');
+
+          let headers = new HttpHeaders().set(
+            'Ocp-Apim-Subscription-Key',
+            appKeys.authKey
+          );
+
+          this.OCRPost = this.http
+            .post(this.OCR_IMG_URL, data, {
+              headers,
+              observe: 'response', // This tells HttpClient to return the full response
+            })
+            .subscribe(
+              (response) => {
+                this.operatorLocation =
+                  response.headers.get('Operator-Location')!;
+                console.log('Operator Location:', this.operatorLocation); //todo: remove
+              },
+              (error) => {
+                console.error('Error in OCR request:', error);
+              }
+            );
+        })
+        .catch((error) => {
+          console.error('Error reading file:', error);
+        });
+    }
+
+    this.getOCRPost();
+  }
+
+  getOCRPost() {
+    let headers = new HttpHeaders().set(
+      'Ocp-Apim-Subscription-Key',
+      appKeys.authKey
+    );
+
+    this.requests = this.http.get(
+      //I think I am getting localhost/operatorLocation
+      //And that's why it is not working as intended
+      this.OCR_GET_URL + '/' + this.operatorLocation,
+      {
+        headers,
+      }
+    );
+  }
 
   @Output() imageSelected = new EventEmitter<string>(); // Output event to emit the selected image URL
 
