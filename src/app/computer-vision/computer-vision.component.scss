@@ -8,6 +8,8 @@
     "image-upload image-upload"
     "describe-btn describe-output"
     "ocr-btn ocr-output";
+
+  align-items: center;
 }
 
 .image-upload {
@@ -20,6 +22,8 @@
 
 .describe-btn {
   grid-area: describe-btn;
+  width: 150px;
+  height: 50px;
 }
 
 .describe-output {
@@ -28,6 +32,8 @@
 
 .ocr-btn {
   grid-area: ocr-btn;
+  width: 150px;
+  height: 50px;
 }
 
 .ocr-output {
