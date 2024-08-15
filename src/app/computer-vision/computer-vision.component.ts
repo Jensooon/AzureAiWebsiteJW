@@ -121,7 +121,7 @@ export class ComputerVisionComponent {
     this.requests = this.http.get(
       //I think I am getting localhost/operatorLocation
       //And that's why it is not working as intended
-      this.OCR_GET_URL + '/' + this.operatorLocation,
+      this.operatorLocation, //this.OCR_GET_URL + '/' +
       {
         headers,
       }
