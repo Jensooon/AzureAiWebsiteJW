@@ -3,17 +3,21 @@
   grid-template-rows: 1fr 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr;
 
+  align-items: center;
+  justify-content: center;
   grid-template-areas:
     "heading heading"
-    "image-upload image-upload"
+    "drag-drop image-preview"
     "describe-btn describe-output"
     "ocr-btn ocr-output";
-
-  align-items: center;
 }
 
-.image-upload {
-  grid-area: image-upload;
+h1 {
+  font-size: 3.5vw;
+}
+
+.drag-drop {
+  grid-area: drag-drop;
 }
 
 .heading {
@@ -54,11 +58,12 @@
 
 .image-preview {
   margin-top: 10px;
+  grid-area: image-preview;
 }
 
 .image-preview img {
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   border: 1px solid #ccc;
   border-radius: 5px;

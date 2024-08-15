@@ -3,7 +3,7 @@
     <h1>Computer Vision</h1>
   </div>
 
-  <div class="image-upload">
+  <div class="drag-drop">
     <div
       class="drop-zone"
       (dragover)="onDragOver($event)"
@@ -18,9 +18,10 @@
         multiple
       />
     </div>
-    <div class="image-preview" *ngIf="imageUrl">
-      <img [src]="imageUrl" alt="Image preview" />
-    </div>
+  </div>
+
+  <div class="image-preview" *ngIf="imageUrl">
+    <img [src]="imageUrl" alt="Image preview" />
   </div>
 
   <button class="describe-btn" (click)="createDescribeImagePost()" mat-button>
