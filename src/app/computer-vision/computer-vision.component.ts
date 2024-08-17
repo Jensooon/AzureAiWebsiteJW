@@ -7,7 +7,7 @@ import {
   HttpParams,
   HttpHeaders,
 } from '@angular/common/http';
-import { map } from 'rxjs';
+import { map, take } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-computer-vision',
@@ -72,7 +72,8 @@ export class ComputerVisionComponent {
     }
   }
 
-  private operatorLocation = '';
+  private operationLocation = '';
+  private getOperationLocation = '';
 
   createOCRPost() {
     const data = new FormData();
@@ -93,22 +94,16 @@ export class ComputerVisionComponent {
               headers,
               observe: 'response', // This tells HttpClient to return the full response
             })
-            .subscribe(
-              (response) => {
-                this.operatorLocation =
-                  response.headers.get('Operator-Location')!;
-                console.log('Operator Location:', this.operatorLocation); //todo: remove
-              },
-              (error) => {
-                console.error('Error in OCR request:', error);
-              }
-            );
-        })
-        .catch((error) => {
-          console.error('Error reading file:', error);
+            .pipe(take(1))
+            .subscribe((response) => {
+              this.operationLocation =
+                response.headers.get('Operation-Location')!;
+              console.log('Operation Location:', this.operationLocation);
+            });
+          console.log('Operation Location 1:', this.operationLocation);
         });
+      console.log('Operation Location 2:', this.operationLocation);
     }
-
     this.getOCRPost();
   }
 
@@ -118,10 +113,12 @@ export class ComputerVisionComponent {
       appKeys.authKey
     );
 
+    console.log('Operation Location in get:', this.operationLocation);
+
     this.requests = this.http.get(
-      //I think I am getting localhost/operatorLocation
+      //I think I am getting localhost/operationLocation
       //And that's why it is not working as intended
-      this.operatorLocation, //this.OCR_GET_URL + '/' +
+      this.operationLocation, //this.OCR_GET_URL + '/' +
       {
         headers,
       }
