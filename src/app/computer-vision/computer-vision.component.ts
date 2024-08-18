@@ -18,29 +18,17 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class ComputerVisionComponent {
   title = 'azure-computer-vision';
-  analysisResult: any;
+  readonly VISION_ENDPOINT = appKeys.VisionEndpoint;
 
-  readonly DESCRIBE_IMG_URL = appKeys.describeImageEndpoint;
-  readonly OCR_IMG_URL = appKeys.OCRImageEndpoint;
-  readonly OCR_GET_URL = appKeys.OCRGetEndpoint;
-
-  requests: any;
   describeImagePost: any;
-
   OCRPost: any;
+  OCRGet: any;
+
+  imageUrl: string | null = null; // Store the single image URL
 
   constructor(private http: HttpClient) {}
 
-  getPosts() {
-    let params = new HttpParams().set('visualFeatures', 'Description');
-    let headers = new HttpHeaders().set('Ocp-Apim-Subscription-Key', '<key1>');
-
-    this.requests = this.http.get(this.DESCRIBE_IMG_URL + '/posts', {
-      params,
-      headers,
-    });
-  }
-
+  //Creates a POST request to the Azure Computer Vision API to describe the image
   createDescribeImagePost() {
     const data = new FormData();
 
@@ -58,7 +46,7 @@ export class ComputerVisionComponent {
           );
 
           this.describeImagePost = this.http
-            .post(this.DESCRIBE_IMG_URL, data, {
+            .post(this.VISION_ENDPOINT + 'analyze', data, {
               params,
               headers,
             })
@@ -73,8 +61,8 @@ export class ComputerVisionComponent {
   }
 
   private operationLocation = '';
-  private getOperationLocation = '';
 
+  //Creates a POST request to the Azure Computer Vision API to read the text in the image
   createOCRPost() {
     const data = new FormData();
 
@@ -90,7 +78,7 @@ export class ComputerVisionComponent {
           );
 
           this.OCRPost = this.http
-            .post(this.OCR_IMG_URL, data, {
+            .post(this.VISION_ENDPOINT + 'read/analyze', data, {
               headers,
               observe: 'response', // This tells HttpClient to return the full response
             })
@@ -100,34 +88,37 @@ export class ComputerVisionComponent {
                 response.headers.get('Operation-Location')!;
               console.log('Operation Location:', this.operationLocation);
             });
-          console.log('Operation Location 1:', this.operationLocation);
         });
-      console.log('Operation Location 2:', this.operationLocation);
     }
     this.getOCRPost();
   }
 
+  //Creates a GET request to the Azure Computer Vision API to get the text from the image
   getOCRPost() {
     let headers = new HttpHeaders().set(
       'Ocp-Apim-Subscription-Key',
       appKeys.authKey
     );
 
-    console.log('Operation Location in get:', this.operationLocation);
-
-    this.requests = this.http.get(
-      //I think I am getting localhost/operationLocation
-      //And that's why it is not working as intended
-      this.operationLocation, //this.OCR_GET_URL + '/' +
-      {
+    this.OCRGet = this.http
+      .get(this.operationLocation, {
         headers,
-      }
-    );
+      })
+      .pipe(map((response) => this.extractTextFromResponse(response)));
   }
 
-  @Output() imageSelected = new EventEmitter<string>(); // Output event to emit the selected image URL
+  private extractTextFromResponse(response: any): string[] {
+    const textArray: string[] = [];
 
-  imageUrl: string | null = null; // Store the single image URL
+    if (response.analyzeResult && response.analyzeResult.readResults) {
+      for (const readResult of response.analyzeResult.readResults) {
+        for (const line of readResult.lines) {
+          textArray.push(line.text);
+        }
+      }
+    }
+    return textArray;
+  }
 
   onDragOver(event: DragEvent) {
     event.preventDefault();
@@ -161,8 +152,11 @@ export class ComputerVisionComponent {
 
     if (file.type.startsWith('image/')) {
       this.imageUrl = URL.createObjectURL(file); // Create a new URL for the new file
-      this.imageSelected.emit(this.imageUrl); // Emit the new image URL
     }
+
+    // Reset the results
+    this.describeImagePost = '';
+    this.OCRGet = '';
   }
   private addDragOverClass() {
     // Optional: Add a class to style the drag over state
