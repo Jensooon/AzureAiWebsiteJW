@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ComputerVisionComponent } from './computer-vision/computer-vision.component';
+import { LanguageComponent } from './language/language.component';
 
 const routeConfig: Routes = [
   { path: 'home', component: HomeComponent, title: 'Home' },
@@ -9,8 +10,14 @@ const routeConfig: Routes = [
     component: ComputerVisionComponent,
     title: 'Computer Vision Capabilities',
   },
-  //TODO: Make home default path once done testing with vision
-  { path: '', redirectTo: '/vision', pathMatch: 'full' },
+  {
+    path: 'language',
+    component: LanguageComponent,
+    title: 'Language Capabilities',
+  },
+
+  //TODO: Make home default path once done testing with language
+  { path: '', redirectTo: '/language', pathMatch: 'full' },
 ];
 
 export default routeConfig;
