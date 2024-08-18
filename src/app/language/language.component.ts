@@ -4,6 +4,7 @@ import {
   TextAnalyticsClient,
   DetectLanguageSuccessResult,
 } from '@azure/ai-text-analytics';
+import { appKeys } from '../app.keys.js';
 
 @Component({
   selector: 'app-language',
@@ -19,8 +20,8 @@ export class LanguageComponent {
   private client: TextAnalyticsClient;
 
   constructor() {
-    const endpoint = 'YOUR_AZURE_ENDPOINT';
-    const apiKey = 'YOUR_AZURE_API_KEY';
+    const endpoint = appKeys.TextEndpoint;
+    const apiKey = appKeys.authTextKey;
     this.client = new TextAnalyticsClient(
       endpoint,
       new AzureKeyCredential(apiKey)
