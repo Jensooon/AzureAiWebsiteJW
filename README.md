@@ -1,6 +1,8 @@
 # AzureAiWebsiteJW
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.2.
+This website aims to showcase the capabilities of Azure AI services within one common place.
+The website is composed of components that are branches of capabilities, such as Computer Vision and Language Service.
 
 ## Development server
 

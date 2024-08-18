@@ -42,7 +42,7 @@ export class ComputerVisionComponent {
           let params = new HttpParams().set('visualFeatures', 'Description');
           let headers = new HttpHeaders().set(
             'Ocp-Apim-Subscription-Key',
-            appKeys.authKey
+            appKeys.authVisionKey
           );
 
           this.describeImagePost = this.http
@@ -74,7 +74,7 @@ export class ComputerVisionComponent {
 
           let headers = new HttpHeaders().set(
             'Ocp-Apim-Subscription-Key',
-            appKeys.authKey
+            appKeys.authVisionKey
           );
 
           this.OCRPost = this.http
@@ -97,7 +97,7 @@ export class ComputerVisionComponent {
   getOCRPost() {
     let headers = new HttpHeaders().set(
       'Ocp-Apim-Subscription-Key',
-      appKeys.authKey
+      appKeys.authVisionKey
     );
 
     this.OCRGet = this.http

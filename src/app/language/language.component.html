@@ -2,4 +2,14 @@
   <div class="header">
     <h1>Language Service</h1>
   </div>
+
+  <textarea
+    class="text-input"
+    [value]="textToAnalyze"
+    (input)="onTextChange($event)"
+  ></textarea>
+  <button class="detectlang-btn" (click)="detectLanguage()">
+    Detect Language
+  </button>
+  <p class="detectlang-output">Detected Language: {{ detectedLanguage }}</p>
 </div>

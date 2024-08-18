@@ -7,9 +7,8 @@
   justify-content: center;
   grid-template-areas:
     "heading heading"
-    "drag-drop image-preview"
-    "describe-btn describe-output"
-    "ocr-btn ocr-output";
+    "text-input text-input"
+    "detectlang-btn detectlang-output";
 }
 
 h1 {
@@ -18,4 +17,16 @@ h1 {
 
 .heading {
   grid-area: heading;
+}
+
+.text-input {
+  grid-area: text-input;
+}
+
+.detectlang-btn {
+  grid-area: detectlang-btn;
+}
+
+.detectlang-output {
+  grid-area: detectlang-output;
 }
