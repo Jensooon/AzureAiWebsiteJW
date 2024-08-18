@@ -5,15 +5,27 @@ import {
   DetectLanguageSuccessResult,
 } from '@azure/ai-text-analytics';
 import { appKeys } from '../app.keys.js';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-language',
   standalone: true,
-  imports: [],
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
   templateUrl: './language.component.html',
   styleUrl: './language.component.scss',
 })
 export class LanguageComponent {
+  value = '';
   textToAnalyze = '';
   detectedLanguage = '';
 
