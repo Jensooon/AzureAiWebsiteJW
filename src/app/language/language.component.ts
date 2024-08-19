@@ -34,21 +34,25 @@ export class LanguageComponent {
   constructor() {
     const endpoint = appKeys.TextEndpoint;
     const apiKey = appKeys.authTextKey;
+    //responsible for making requests to the Text Analytics service
     this.client = new TextAnalyticsClient(
       endpoint,
       new AzureKeyCredential(apiKey)
     );
   }
 
+  //Update textToAnalyze when a change occurs in the textarea
   onTextChange(event: Event) {
     this.textToAnalyze = (event.target as HTMLTextAreaElement).value;
   }
 
   async detectLanguage() {
     try {
+      //Calls the detectLanguage method of the Text Analytics client
       const [result] = await this.client.detectLanguage([this.textToAnalyze]);
 
       if (this.isSuccessResult(result)) {
+        //Combines the name and ISO 639-1 name of the detected language
         this.detectedLanguage = `${result.primaryLanguage.name} (${result.primaryLanguage.iso6391Name})`;
       } else {
         this.detectedLanguage = `Error: ${result.error.message}`;
@@ -62,6 +66,7 @@ export class LanguageComponent {
     }
   }
 
+  //Check if the result is a success result
   private isSuccessResult(result: any): result is DetectLanguageSuccessResult {
     return 'primaryLanguage' in result;
   }
