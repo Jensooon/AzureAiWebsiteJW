@@ -21,5 +21,21 @@
   <button class="detectlang-btn" (click)="detectLanguage()" mat-button>
     Detect Language
   </button>
-  <p class="detectlang-output">Detected Language: {{ detectedLanguage }}</p>
+  <p class="detectlang-output">{{ detectedLanguage }}</p>
+
+  <!-- <button class="extractphrases-btn" (click)="extractPhrases()" mat-button>
+    Extract Key Phrases
+  </button>
+
+  <p class="extractphrases-output">{{ keyPhrases }}</p> -->
+
+  <button class="extractphrases-btn" (click)="extractKeyPhrases()" mat-button>
+    Extract Key Phrases
+  </button>
+  <div *ngIf="keyPhrases.length > 0" class="extractphrases-output">
+    <h3>Key Phrases:</h3>
+    <ul>
+      <li *ngFor="let phrase of keyPhrases">{{ phrase }}</li>
+    </ul>
+  </div>
 </div>
