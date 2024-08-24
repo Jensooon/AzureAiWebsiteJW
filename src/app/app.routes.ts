@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ComputerVisionComponent } from './computer-vision/computer-vision.component';
 import { LanguageComponent } from './language/language.component';
+import { DashboardComponent } from './home/dashboard/dashboard.component';
 
 const routeConfig: Routes = [
   { path: 'home', component: HomeComponent, title: 'Home' },
