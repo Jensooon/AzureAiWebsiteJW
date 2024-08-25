@@ -1,8 +1,7 @@
-<div class="grid-container">
-  <div class="header">
-    <h1>Language Service</h1>
-  </div>
+<div class="container">
+  <h1>Speech to Text using Azure Speech Service</h1>
 
-  <button class="detectlang-btn" mat-button>Test speech</button>
-  <p class="detectlang-output"></p>
+  <button (click)="startRecognition()">Start Speech Recognition</button>
+
+  <p *ngIf="transcription">Transcription: {{ transcription }}</p>
 </div>
