@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { title } from 'process';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,6 +27,8 @@ import { title } from 'process';
 })
 export class DashboardComponent {
   private breakpointObserver = inject(BreakpointObserver);
+
+  constructor(private router: Router) {}
 
   /** Based on the screen size, switch from standard to one column per row */
   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
@@ -50,8 +53,18 @@ export class DashboardComponent {
       }
 
       return [
-        { title: 'Vision', cols: 1, rows: 1 },
-        { title: 'Language', cols: 1, rows: 1 },
+        {
+          title: 'Vision',
+          cols: 1,
+          rows: 1,
+          onClick: () => this.handleVisionClick(),
+        },
+        {
+          title: 'Language',
+          cols: 1,
+          rows: 1,
+          onClick: () => this.handleVisionClick(),
+        },
         { title: 'Card 3', cols: 1, rows: 1 },
         { title: 'Card 4', cols: 1, rows: 1 },
       ];
@@ -59,11 +72,11 @@ export class DashboardComponent {
   );
 
   handleVisionClick() {
-    console.log('Card 1 clicked');
+    this.router.navigate(['/vision']);
   }
 
   handleLanguageClick() {
-    console.log('Card 2 clicked');
+    this.router.navigate(['/language']);
   }
 
   onCardClick(card: any): void {
