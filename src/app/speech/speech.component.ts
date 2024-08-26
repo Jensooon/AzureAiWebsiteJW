@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import * as SpeechSDK from 'microsoft-cognitiveservices-speech-sdk';
 import { appKeys } from '../app.keys.js';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-speech',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatButtonModule],
   templateUrl: './speech.component.html',
   styleUrl: './speech.component.scss',
 })

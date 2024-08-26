@@ -1,7 +1,11 @@
-<div class="container">
-  <h1>Speech to Text using Azure Speech Service</h1>
+<div class="grid-container">
+  <h1 class="heading">Speech to Text using Azure Speech Service</h1>
 
-  <button (click)="startRecognition()">Start Speech Recognition</button>
+  <button class="speechrecognition-btn" (click)="startRecognition()" mat-button>
+    Start Speech Recognition
+  </button>
 
-  <p *ngIf="transcription">Transcription: {{ transcription }}</p>
+  <p class="speechrecognition-output" *ngIf="transcription">
+    {{ transcription }}
+  </p>
 </div>
