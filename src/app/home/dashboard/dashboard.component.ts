@@ -47,7 +47,12 @@ export class DashboardComponent {
             rows: 1,
             onClick: () => this.handleLanguageClick(),
           },
-          { title: 'Card 3', cols: 1, rows: 1 },
+          {
+            title: 'Speech',
+            cols: 1,
+            rows: 1,
+            onClick: () => this.handleSpeechClick(),
+          },
           { title: 'Card 4', cols: 1, rows: 1 },
         ];
       }
@@ -63,9 +68,14 @@ export class DashboardComponent {
           title: 'Language',
           cols: 1,
           rows: 1,
-          onClick: () => this.handleVisionClick(),
+          onClick: () => this.handleLanguageClick(),
         },
-        { title: 'Card 3', cols: 1, rows: 1 },
+        {
+          title: 'Speech',
+          cols: 1,
+          rows: 1,
+          onClick: () => this.handleSpeechClick(),
+        },
         { title: 'Card 4', cols: 1, rows: 1 },
       ];
     })
@@ -77,6 +87,10 @@ export class DashboardComponent {
 
   handleLanguageClick() {
     this.router.navigate(['/language']);
+  }
+
+  handleSpeechClick() {
+    this.router.navigate(['/speech']);
   }
 
   onCardClick(card: any): void {
