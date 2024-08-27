@@ -3,6 +3,7 @@ import { HomeComponent } from './home/home.component';
 import { ComputerVisionComponent } from './computer-vision/computer-vision.component';
 import { LanguageComponent } from './language/language.component';
 import { SpeechComponent } from './speech/speech.component';
+import { BotComponent } from './bot/bot.component';
 
 const routeConfig: Routes = [
   { path: 'home', component: HomeComponent, title: 'Home' },
@@ -20,6 +21,11 @@ const routeConfig: Routes = [
     path: 'speech',
     component: SpeechComponent,
     title: 'Speech Capabilities',
+  },
+  {
+    path: 'bot',
+    component: BotComponent,
+    title: 'Bot Capabilities',
   },
 
   //TODO: Make home default path once done testing with language
