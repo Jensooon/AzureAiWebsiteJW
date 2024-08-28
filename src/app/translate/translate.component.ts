@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { map } from 'rxjs';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-translate',
@@ -23,6 +24,8 @@ import { map } from 'rxjs';
     MatInputModule,
     MatFormFieldModule,
     MatIconModule,
+    AsyncPipe,
+    JsonPipe,
   ],
   templateUrl: './translate.component.html',
   styleUrl: './translate.component.scss',
@@ -43,9 +46,11 @@ export class TranslateComponent {
 
   //Creates a POST request to the Azure Computer Vision API to describe the image
   createTranslatePost() {
-    const data = {
-      Text: this.textToAnalyze,
-    };
+    const data = [
+      {
+        Text: this.textToAnalyze,
+      },
+    ];
 
     let params = new HttpParams().set('to', this.currentLangCode);
     let headers = new HttpHeaders({
