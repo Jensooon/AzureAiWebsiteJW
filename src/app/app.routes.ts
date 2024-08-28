@@ -4,6 +4,7 @@ import { ComputerVisionComponent } from './computer-vision/computer-vision.compo
 import { LanguageComponent } from './language/language.component';
 import { SpeechComponent } from './speech/speech.component';
 import { BotComponent } from './bot/bot.component';
+import { TranslateComponent } from './translate/translate.component';
 
 const routeConfig: Routes = [
   { path: 'home', component: HomeComponent, title: 'Home' },
@@ -27,6 +28,7 @@ const routeConfig: Routes = [
     component: BotComponent,
     title: 'Bot Capabilities',
   },
+  { path: 'translate', component: TranslateComponent, title: 'Translate' },
 
   //TODO: Make home default path once done testing with language
   { path: '', redirectTo: '/language', pathMatch: 'full' },
