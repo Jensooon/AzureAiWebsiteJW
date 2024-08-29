@@ -37,18 +37,24 @@ export class DashboardComponent {
         return [
           {
             title: 'Vision',
+            description:
+              'Explore the capabilities of the Azure Computer Vision Service.',
             cols: 1,
             rows: 1,
             onClick: () => this.handleVisionClick(),
           },
           {
             title: 'Language',
+            description:
+              'Explore the capabilities of the Azure Language Service.',
             cols: 1,
             rows: 1,
             onClick: () => this.handleLanguageClick(),
           },
           {
             title: 'Speech',
+            description:
+              'Explore the capabilities of the Azure Speech Service.',
             cols: 1,
             rows: 1,
             onClick: () => this.handleSpeechClick(),
@@ -60,18 +66,23 @@ export class DashboardComponent {
       return [
         {
           title: 'Vision',
+          description:
+            'Explore the capabilities of the Azure Computer Vision Service.',
           cols: 1,
           rows: 1,
           onClick: () => this.handleVisionClick(),
         },
         {
           title: 'Language',
+          description:
+            'Explore the capabilities of the Azure Language Service.',
           cols: 1,
           rows: 1,
           onClick: () => this.handleLanguageClick(),
         },
         {
           title: 'Speech',
+          description: 'Explore the capabilities of the Azure Speech Service.',
           cols: 1,
           rows: 1,
           onClick: () => this.handleSpeechClick(),
