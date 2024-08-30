@@ -105,14 +105,14 @@ export class DashboardComponent {
           description: 'Explore the capabilities of the Bot Speech Service.',
           cols: 1,
           rows: 1,
-          onClick: () => this.handleSpeechClick(),
+          onClick: () => this.handleBotClick(),
         },
         {
           title: 'Translate',
           description: 'Explore the capabilities of the Translate Service.',
           cols: 1,
           rows: 1,
-          onClick: () => this.handleSpeechClick(),
+          onClick: () => this.handleTranslateClick(),
         },
       ];
     })
@@ -128,6 +128,14 @@ export class DashboardComponent {
 
   handleSpeechClick() {
     this.router.navigate(['/speech']);
+  }
+
+  handleBotClick() {
+    this.router.navigate(['/bot']);
+  }
+
+  handleTranslateClick() {
+    this.router.navigate(['/translate']);
   }
 
   onCardClick(card: any): void {
