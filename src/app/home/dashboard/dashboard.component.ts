@@ -59,7 +59,20 @@ export class DashboardComponent {
             rows: 1,
             onClick: () => this.handleSpeechClick(),
           },
-          { title: 'Card 4', cols: 1, rows: 1 },
+          {
+            title: 'Bot',
+            description: 'Explore the capabilities of the Bot Speech Service.',
+            cols: 1,
+            rows: 1,
+            onClick: () => this.handleSpeechClick(),
+          },
+          {
+            title: 'Translate',
+            description: 'Explore the capabilities of the Translate Service.',
+            cols: 1,
+            rows: 1,
+            onClick: () => this.handleSpeechClick(),
+          },
         ];
       }
 
@@ -87,7 +100,20 @@ export class DashboardComponent {
           rows: 1,
           onClick: () => this.handleSpeechClick(),
         },
-        { title: 'Card 4', cols: 1, rows: 1 },
+        {
+          title: 'Bot',
+          description: 'Explore the capabilities of the Bot Speech Service.',
+          cols: 1,
+          rows: 1,
+          onClick: () => this.handleSpeechClick(),
+        },
+        {
+          title: 'Translate',
+          description: 'Explore the capabilities of the Translate Service.',
+          cols: 1,
+          rows: 1,
+          onClick: () => this.handleSpeechClick(),
+        },
       ];
     })
   );
