@@ -9,6 +9,7 @@
     "heading heading"
     "text-input language-select"
     "translatelang-btn translatelang-output";
+  gap: 10px;
 }
 
 h1 {
@@ -25,6 +26,8 @@ h1 {
 
 .language-select {
   grid-area: language-select;
+  min-width: 150px;
+  margin-top: -8%;
 }
 
 .translatelang-btn {

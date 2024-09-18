@@ -19,6 +19,15 @@
     }
   </mat-form-field>
 
+  <div class="language-select">
+    <mat-label>Select language to translate to:</mat-label>
+    <mat-select [(value)]="selectedLanguage">
+      <mat-option *ngFor="let language of languages" [value]="language">
+        {{ language }}
+      </mat-option>
+    </mat-select>
+  </div>
+
   <button class="translatelang-btn" (click)="createTranslatePost()" mat-button>
     Translate Language
   </button>
