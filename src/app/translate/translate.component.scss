@@ -7,7 +7,7 @@
   justify-content: center;
   grid-template-areas:
     "heading heading"
-    "text-input text-input"
+    "text-input language-select"
     "translatelang-btn translatelang-output";
 }
 
@@ -21,6 +21,10 @@ h1 {
 
 .text-input {
   grid-area: text-input;
+}
+
+.language-select {
+  grid-area: language-select;
 }
 
 .translatelang-btn {

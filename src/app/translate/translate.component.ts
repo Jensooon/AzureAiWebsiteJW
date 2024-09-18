@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { map } from 'rxjs';
 import { AsyncPipe, JsonPipe } from '@angular/common';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-translate',
@@ -24,6 +25,7 @@ import { AsyncPipe, JsonPipe } from '@angular/common';
     MatInputModule,
     MatFormFieldModule,
     MatIconModule,
+    MatSelectModule,
     AsyncPipe,
     JsonPipe,
   ],
