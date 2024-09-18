@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { map } from 'rxjs';
 import { AsyncPipe, JsonPipe, NgFor } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
+import { response } from 'express';
 
 @Component({
   selector: 'app-translate',
@@ -90,10 +91,12 @@ export class TranslateComponent {
       'Content-Type': 'application/json',
     });
 
-    this.translatePost = this.http.post(this.TRANSLATE_ENDPOINT, data, {
-      params,
-      headers,
-    });
+    this.translatePost = this.http
+      .post(this.TRANSLATE_ENDPOINT, data, {
+        params,
+        headers,
+      })
+      .pipe(map((response: any) => response[0].translations[0].text));
   }
 
   //Update textToAnalyze when a change occurs in the textarea
