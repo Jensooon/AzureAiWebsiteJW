@@ -55,6 +55,15 @@ export class TranslateComponent {
     'Korean',
     'Chinese (Simplified)',
     'Chinese (Traditional)',
+    'Arabic',
+    'Dutch',
+    'Portuguese',
+    'Russian',
+    'Turkish',
+    'Vietnamese',
+    'Swedish',
+    'Polish',
+    'Malayalam',
   ];
 
   // Mapping of language names to language codes
@@ -68,6 +77,15 @@ export class TranslateComponent {
     Korean: 'ko',
     'Chinese (Simplified)': 'zh-Hans',
     'Chinese (Traditional)': 'zh-Hant',
+    Arabic: 'ar',
+    Dutch: 'nl',
+    Portuguese: 'pt',
+    Russian: 'ru',
+    Turkish: 'tr',
+    Vietnamese: 'vi',
+    Swedish: 'sv',
+    Polish: 'pl',
+    Malayalam: 'ml',
   };
 
   value = '';
